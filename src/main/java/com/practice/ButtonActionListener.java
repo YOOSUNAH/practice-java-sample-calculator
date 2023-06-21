@@ -43,15 +43,18 @@ public class ButtonActionListener implements ActionListener {
                 Integer notNumberIdx = findNotNumberIdx();
                 String operation = inputs.get(notNumberIdx);
 
-                Integer firstOperationIdx = findNotNumberIdx();
-                Integer numbersBeforeOperation = Integer.parseInt(String.join("", inputs.subList(0, firstOperationIdx)));
+                Integer OperationIdx = findNotNumberIdx();
+                Integer numbersBeforeOperation = Integer.parseInt(String.join("", inputs.subList(0, OperationIdx)));
 
-                List<String> strings = inputs.subList(firstOperationIdx + 1, inputs.size()-1);
+//                Integer result = null;
+//                if(result == =){
+//                   int firstNumber =
+//                }
+                List<String> strings = inputs.subList(OperationIdx + 1, inputs.size() - 1);
                 Integer numbersAfterOperation = Integer.parseInt(String.join("", strings));
 
                 // 사칙연산 = 2개 있으면 그 뒤에 숫자 랑 계산해야 함
-
-
+                //  1 + 2 = 3 + 1 = 4
 
                 Integer result = null;
                 if (operation.equals("+")) {
@@ -67,7 +70,7 @@ public class ButtonActionListener implements ActionListener {
                     result = divide(numbersBeforeOperation, numbersAfterOperation);
                 }
                 UserInput.SPACE.setText(String.valueOf(result));
-                System.out.println("계산 된 값 = " + result);
+                System.out.println("계산 된 값 : " + result);
                 inputs.add(String.valueOf(result));
 
             }
