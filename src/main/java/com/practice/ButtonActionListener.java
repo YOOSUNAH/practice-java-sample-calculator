@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/*
+# 요구사항
+- '=' 이 입력된 경우 앞의 연산을 모두 계산하여 새로운 입력으로 취급함.
+ */
+
 public class ButtonActionListener implements ActionListener {
+
     List<String> inputs = new ArrayList<>();
 
     //    {"1", "0", "3", "+", "1", "0", "0"}
@@ -42,19 +48,10 @@ public class ButtonActionListener implements ActionListener {
             if (input.equals("=")) {
                 Integer notNumberIdx = findNotNumberIdx();
                 String operation = inputs.get(notNumberIdx);
+                Integer numbersBeforeOperation = Integer.parseInt(String.join("", inputs.subList(0, notNumberIdx)));
 
-                Integer OperationIdx = findNotNumberIdx();
-                Integer numbersBeforeOperation = Integer.parseInt(String.join("", inputs.subList(0, OperationIdx)));
-
-//                Integer result = null;
-//                if(result == =){
-//                   int firstNumber =
-//                }
-                List<String> strings = inputs.subList(OperationIdx + 1, inputs.size() - 1);
+                List<String> strings = inputs.subList(notNumberIdx + 1, inputs.size() - 1);
                 Integer numbersAfterOperation = Integer.parseInt(String.join("", strings));
-
-                // 사칙연산 = 2개 있으면 그 뒤에 숫자 랑 계산해야 함
-                //  1 + 2 = 3 + 1 = 4
 
                 Integer result = null;
                 if (operation.equals("+")) {
@@ -70,9 +67,9 @@ public class ButtonActionListener implements ActionListener {
                     result = divide(numbersBeforeOperation, numbersAfterOperation);
                 }
                 UserInput.SPACE.setText(String.valueOf(result));
-                System.out.println("계산 된 값 : " + result);
-                inputs.add(String.valueOf(result));
 
+                inputs.clear();
+                inputs.add(String.valueOf(result));
             }
 
         }
